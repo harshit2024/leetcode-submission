@@ -11,34 +11,31 @@ class Solution{
     // N: size of array
     // K: element to be searche
     
-    bool binarySearch(int arr[], int N, int k)
+    bool binarySearch(int arr[], int l,int r, int k)
     {
-        int l=0;
-        int r=N-1;
-        int mid=(l+r)/2;
         
-        while(l<=r){
-            
-            if(k==arr[mid])
-            {
-                return true;
-            }
-            else if(k>arr[mid]){
-                l=mid+1;
-                
-            }
-            else{
-                r=mid-1;
-            }
-            mid=(l+r)/2;
+        if(l>r){
+            return false;
         }
-        return false;
+         int mid=l+(r-l)/2;
+    
+        if(arr[mid]==k){
+            return true;
+        }
+        if(k>arr[mid]){
+            return binarySearch(arr,mid+1,r,k);
+        }
+        else{
+            return binarySearch(arr,l,mid-1,k);
+        
+        }
+      
     }
     int searchInSorted(int arr[], int N, int K) 
     { 
     
        // Your code here
-       if(binarySearch(arr,N,K)){
+       if(binarySearch(arr,0,N-1,K)){
            return 1;
        }
        return -1;
