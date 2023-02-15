@@ -33,10 +33,45 @@ class Solution {
       dp[i][j]=ans;
       return dp[i][j];
   }
+  
+  
+  
+  
+  
+  
+  int bottomrec(string s,string t,int i,int j){
+      
+      for(int j=0;j<=t.length();j++){
+          dp[s.length()][j]=t.length()-j;
+      }
+      
+       for(int i=0;j<=s.length();j++){
+          dp[i][t.length()]=s.length()-i;
+      }
+      
+      for(int i=s.length()-1;i>=0;i--){
+          for(int j=t.length()-1;j>=0;j--){
+              if(s[i]==t[j]){
+                dp[i][j]=dp[i+1][j+1];
+               }
+      else{
+          int insertans=1+dp[i][j+1];
+          int deleteans=1+dp[i+1][j];
+          int replaceans=1+dp[i+1][j+1];
+          
+          dp[i][j]=min(insertans,min(deleteans,replaceans));
+      }
+          }
+      }
+      return dp[0][0];
+      
+  }
     int editDistance(string s, string t) {
         // Code here
         memset(dp,-1,sizeof(dp));
         return rec(s,t,0,0);
+        
+        return bottomrec(s,t,0,0);
         
     }
 };
