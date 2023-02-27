@@ -12,20 +12,43 @@ class Solution
      vector<vector<int>>dp;
     //Function to find the length of longest common subsequence in two strings.
     
-    int rec(int i,int j,string s1,string s2){
-         if(i==0||j==0){
-            return 0;
+    int rec(int x,int y,string s1,string s2){
+        //  if(i==0||j==0){
+        //     return 0;
+        // }
+        
+        for(int i=0;i<x;i++){
+            dp[i][0]=0;
+            
         }
-        if(dp[i][j]!=-1){
-            return dp[i][j];
+        for(int j=0;j<y;j++){
+            dp[0][j]=0;
+            
         }
-        if(s1[i-1]==s2[j-1]){
-            dp[i][j]= 1+rec(i-1,j-1,s1,s2);
+
+        for(int i=1;i<=x;i++){
+            for(int j=1;j<=y;j++){
+                if(s1[i-1]==s2[j-1]){
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+                else{
+                    dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+                }
+            }
         }
-        else{
-              dp[i][j]= max(rec(i-1,j,s1,s2),rec(i,j-1,s1,s2));
-        }
-        return dp[i][j];
+        
+        return dp[x][y];
+
+        // if(dp[i][j]!=-1){
+        //     return dp[i][j];
+        // }
+        // if(s1[i-1]==s2[j-1]){
+        //     dp[i][j]= 1+rec(i-1,j-1,s1,s2);
+        // }
+        // else{
+        //       dp[i][j]= max(rec(i-1,j,s1,s2),rec(i,j-1,s1,s2));
+        // }
+        // return dp[i][j];
         
     }
     int lcs(int x, int y, string s1, string s2)
