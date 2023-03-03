@@ -29,19 +29,11 @@ int main() {
 
 
 //User function Template for C++
-void Swap(char *a,char *b){
-    char *temp;
-    temp=&*a;
-    a=&*b;
-    b=&*temp;
-    
-}
 
 string reverseWord(string str){
     
   //Your code here
-  int i=0;
-  int j=str.size()-1;
+  int i=0,j=str.size()-1;
   while(i<=j){
       swap(str[i++],str[j--]);
   }
