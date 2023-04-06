@@ -40,12 +40,65 @@ class Solution
         
         return dp[curr][prev+1]=max(take,notTake);
     }
+    
+   
+   
+    int solveTab(int n,int a[]){
+        vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+       
+       for(int curr=n-1;curr>=0;curr--){
+          for(int prev=curr-1;prev>=-1;prev--){
+              
+        int take=0;
+        if(a[curr]>a[prev]||prev==-1){
+            take=1+ dp[curr+1][curr+1];
+        }
+        int notTake=0+dp[curr+1][prev+1];
+        
+        dp[curr][prev+1]=max(take,notTake);
+          }
+       }
+       
+       return dp[0][0];
+        
+    }
+    
+    
+    int solveSO(int n,int a[]){
+      //vector<vector<int>>dp(n+1,vector<int>(n+1,0));
+      
+      
+      vector<int>currrow(n+1,0);
+      vector<int>next(n+1,0);
+       for(int curr=n-1;curr>=0;curr--){
+          for(int prev=curr-1;prev>=-1;prev--){
+              
+        int take=0;
+        if(a[curr]>a[prev]||prev==-1){
+            take=1+next[curr+1];
+        }
+        int notTake=0+next[prev+1];
+        
+        currrow[prev+1]=max(take,notTake);
+          }
+       }
+       
+       return next[0];
+        
+    }
+    
+    
+    
     int longestSubsequence(int n, int a[])
     {
        // your code here
       // return solve(n,a,0,-1);
-      vector<vector<int>>dp(n,vector<int>(n+1,-1));
-        return solvemem(n,a,0,-1,dp); 
+    
+    
+    //   vector<vector<int>>dp(n,vector<int>(n+1,-1));
+    //     return solvemem(n,a,0,-1,dp); 
+    
+     return solveTab(n,a);
     }
 };
 
