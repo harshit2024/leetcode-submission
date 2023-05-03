@@ -94,18 +94,11 @@ class Solution
         // code here
         // just remove the loop without losing any nodes
         
-         if(head==NULL&& head->next==NULL){
-            return ;
-        }
-        if(head->next==head)
-        {
-            head->next=NULL;
-            return;
-        }
+       
         Node *slow=head;
         Node *fast=head;
         
-        while(slow!=NULL && fast!=NULL){
+        while(slow!=NULL && fast!=NULL&& head->next!=NULL){
            fast=fast->next;
            if(fast!=NULL){
                fast=fast->next;
