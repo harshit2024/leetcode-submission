@@ -94,19 +94,48 @@ class Solution
         // code here
         // just remove the loop without losing any nodes
         
-        map<Node*, bool>mp;
-        Node *prev,*curr;
-        curr=head;
-        
-        while(curr!=NULL){
-            if(mp[curr]){
-                break;
-            }
-            mp[curr]=true;
-            prev=curr;
-            curr=curr->next;
+         if(head==NULL&& head->next==NULL){
+            return ;
         }
-        prev->next=NULL;
+        if(head->next==head)
+        {
+            head->next=NULL;
+            return;
+        }
+        Node *slow=head;
+        Node *fast=head;
+        
+        while(slow!=NULL && fast!=NULL){
+           fast=fast->next;
+           if(fast!=NULL){
+               fast=fast->next;
+           }
+           slow=slow->next;
+           
+           if(fast==slow){
+               break;
+           }
+        }
+        
+        if(slow==head){
+            while(slow->next!=head){
+                slow=slow->next;
+                
+            }
+            slow->next=NULL;
+        }
+        
+        else if(slow==fast){
+            slow=head;
+              while(slow->next!=fast->next){
+            slow=slow->next;
+            fast=fast->next;
+             }
+        
+        fast->next=NULL;
+            
+        }
+      
         return;
     }
 };
