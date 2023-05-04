@@ -17,9 +17,7 @@ public:
         if(head==NULL || head->next==NULL){
             return head;
         }
-        if(head->next->next==NULL){
-            
-        }
+       
         while(fast!=NULL ){
              fast=fast->next;
             if(fast){
