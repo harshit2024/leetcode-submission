@@ -32,9 +32,23 @@ struct Node *start = NULL;
 class Solution
 {
     public:
+    void InsertAtTail(Node* &head,Node* &tail,int data){
+        Node* temp=new Node(data);
+        tail->next=temp;
+        tail=tail->next;
+    }
     //Function to sort a linked list of 0s, 1s and 2s.
     Node* segregate(Node *head) {
         
+        
+        Node* zerohead=new Node(-1);
+        Node* zerotail=zerohead;
+        
+        Node* onehead=new Node(-1);
+        Node* onetail=onehead;
+        
+        Node* twohead=new Node(-1);
+        Node* twotail=twohead;
         // Add code here
         Node* curr=head;
         int countzero=0;
@@ -42,32 +56,33 @@ class Solution
         int counttwo=0;
         while(curr){
             if(curr->data==0){
-                countzero++;
+                InsertAtTail(zerohead,zerotail,0);
+                
             }
             else if(curr->data==1){
-                countone++;
+                 InsertAtTail(onehead,onetail,1);
             }
             else if(curr->data==2){
-                counttwo++;
+                 InsertAtTail(twohead,twotail,2);
             }
             curr=curr->next;
         }
-        curr=head;
+       if(onehead->next){
+          zerotail->next=onehead->next; 
+           
+       }
+       else{
+            zerotail->next=twohead->next;
+       }
+       
+       onetail->next=twohead->next;
+       twotail->next=NULL;
+      
+      
         
-        while(countzero--){
-            curr->data=0;
-            curr=curr->next;
-        }
-         while(countone--){
-            curr->data=1;
-            curr=curr->next;
-        }
-         while(counttwo--){
-            curr->data=2;
-            curr=curr->next;
-        }
+       
         
-        return head;
+        return zerohead->next;;
     }
 };
 
