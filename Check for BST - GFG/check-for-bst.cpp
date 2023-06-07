@@ -38,10 +38,28 @@ class Solution
         }
     }
     
+    void solve2(Node* root,bool &flag,Node*& prev){
+        if(root==NULL){
+            return ;
+        }
+        solve2(root->left,flag,prev);
+        if(prev!=NULL && root->data<=prev->data){
+            flag=false;
+        }
+        prev=root;
+        
+        solve2(root->right,flag,prev);
+        
+    }
+    
     bool isBST(Node* root) 
     {
         // Your code here
-        return solve(root,INT_MIN,INT_MAX);
+      //  return solve(root,INT_MIN,INT_MAX);
+        Node* prev=NULL;
+        bool flag=true;
+        solve2(root,flag,prev);
+        return flag;
         
     }
 };
